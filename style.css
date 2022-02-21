@@ -1,0 +1,152 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --default-font: 'Open Sans', sans-serif;
+}
+
+html {
+    background: #090C02;
+}
+
+.size {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 80px;
+    font-family: var(--default-font);
+    font-size: 2rem;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #005eac;
+    color: #eee;
+    box-shadow: 2px 2px 2px 2px rgb(49, 49, 49);
+    transition: all 0.05s ease-in-out;
+}
+
+.size:hover {
+    color: #222;
+    background-color: #eee;
+}
+
+.wrapper {
+    padding: 0px;
+    margin: 46px auto;
+    display: flex;
+    justify-content: center;
+    max-width: 1000px;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 2vh;
+    background: #090C02;
+    max-width: 700px;
+    min-height: fit-content;
+}
+
+label {
+    color: #222;
+    font-size: 50px;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform .035s;
+}
+
+label:hover {
+    transform: scale(1.2);
+}
+
+.card {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 600ms;
+    transition: all 0.2s ease-in-out;
+    z-index: 20;
+    margin: 10px;
+}
+
+.card img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    text-align: center;
+    line-height: 200px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px 2px rgb(49, 49, 49);
+}
+
+.card .back {
+    width: 100px;
+    height: 100px;
+    color: #fff;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+input {
+    display: none;
+}
+
+:checked+.card {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    background-color: #005eac;
+    height: 90px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+}
+
+svg {
+    fill: #eee;
+    transition: all 0.05s ease-in-out;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    height: 50px;
+    width: 135px;
+}
+
+svg:hover {
+    fill: #090C02;
+}
+
+.footer-div__1 {
+    display: flex;
+    justify-content: center;
+    width: 135px;
+}
+
+svg.icon-1 {
+    width: 50px;
+}
