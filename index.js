@@ -25,7 +25,7 @@ function display() {
     // add new cards
     for (let i = 0; i < length; i++) {
 
-        let card = document.createElement("label");
+        let card = document.createElement("div");
         card.id = "label";
 
         let tempElement;
@@ -59,10 +59,16 @@ function display() {
 
         // card structure
         card.innerHTML = `
-            <input onclick="count_clicks(${i})" id="input" type="checkbox" />
-            <div class="card">                
-                <img class="front" src="assets/unknown.png">
-                <img class="back" src="assets/${tempElement}.png">
+            
+            <div onclick="checkCard(${i})" class="flip-card">
+                <div class="flip-card-inner for_logic${i}">
+                    <div class="flip-card-front">
+                        <img src="assets/unknown.png" alt="Question Mark" style="width: 100px; height: 100px;">
+                    </div>
+                    <div class="flip-card-back for_second_logic${i}">
+                        <img class="back" src="assets/${tempElement}.png" alt="Answer">
+                    </div>
+                </div>
             </div>
         `;
         main.append(card);
@@ -71,36 +77,61 @@ function display() {
 
 display();
 
-var input_element = document.querySelectorAll("#input:checked");
-var card_back = document.getElementsByClassName("back");
-var card_label = document.querySelectorAll("#label");
-var checkbox_element = document.querySelectorAll("#input");
+let check_arr = [];
+let cursors = [];
 
-var clicked_src;
-var clicked_num;
+function checkCard(el) {
+    const card = document.querySelector(`.for_logic${el}`);
+    card.style.pointerEvents = "none";
+    const img = document.querySelector(`.for_second_logic${el} img`).src;
+    card.classList.add('flipper');
+    check_arr.unshift(card);
+    check_arr.unshift(img);
+    console.log(check_arr);
 
-console.log(card_label);
+    if (check_arr.length % 4 == 0) {
 
-count_clicks = (el) => {
+        for (let n = 0; n < length; n++) {
 
-    clicked_src = card_back[el].src;
-    clicked_num = el;
-    console.log(card_back[el].src)
-    console.log(clicked_src)
+            const cursor = document.querySelector(`.for_logic${n}`);
+            cursor.style.pointerEvents = "none";
 
-    if (card_back[el].src == clicked_src) {
-        unclickable(el);
-        unclickable(clicked_num);
-        console.log("matched")
-    }
+        }
+        if (check_arr[0] != check_arr[2]) {
 
-    if (card_back != clicked_src) {
-        clickSimulate(el);
-        clickSimulate(clicked_num);
+            const timeout = setTimeout(check, 500);
 
+        } else {
+
+            for (let n = 0; n < length; n++) {
+                const cursor = document.querySelector(`.for_logic${n}`);
+                let result = cursors.indexOf(cursor);
+                if (result == -1) {
+                    cursor.style.pointerEvents = "auto";
+                } else {
+                    cursor.style.pointerEvents = "none";
+                }
+            }
+
+            check_arr[1].style.pointerEvents = "none";
+            check_arr[3].style.pointerEvents = "none";
+            cursors.unshift(check_arr[1]);
+            cursors.unshift(check_arr[3]);
+
+        }
     }
 }
 
-const unclickable = (el) => { card_label[el].style.pointerEvents = "none"; }
-
-const clickSimulate = (el) => { card_label[el].click(); }
+function check() {
+    check_arr[1].classList.remove('flipper')
+    check_arr[3].classList.remove('flipper')
+    for (let n = 0; n < length; n++) {
+        const cursor = document.querySelector(`.for_logic${n}`)
+        let result = cursors.indexOf(cursor)
+        if (result == -1) {
+            cursor.style.pointerEvents = "auto"
+        } else {
+            cursor.style.pointerEvents = "none"
+        }
+    }
+}
